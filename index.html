@@ -1,5 +1,154 @@
 <!doctype html>
 <html lang="en">
+  <style>
+  /* === 统一卡片排版为 US 风格 === */
+
+  /* 卡片网格布局 */
+  #productGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  /* 单个卡片外观 */
+  .product-card{
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 28px rgba(148,163,184,.45);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* 图片区域（如果你之前已经加了一段 .product-card__media，可以保留，只要保证这一段在最后） */
+  .product-card__media{
+    position: relative;
+    border-radius: 18px 18px 0 0;
+    overflow: hidden;
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .product-card__media img{
+    width: 100%;
+    height: auto;
+    max-height: 260px;        /* 需要更矮就改成 230 / 240 等 */
+    object-fit: contain;      /* 完整显示图片 */
+    display: block;
+  }
+
+  /* 卡片正文部分 */
+  .product-card__body{
+    padding: 14px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: .9rem;
+    color: #374151;
+  }
+
+  /* 顶部小字：分类 + ASIN */
+  .product-card__meta{
+    font-size: .74rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .meta-cat{
+    font-weight: 600;
+  }
+  .meta-asin{
+    font-weight: 500;
+  }
+
+  /* 标题 & 文案 */
+  .product-card__title{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .product-card__hook{
+    font-size: .88rem;
+    color: #4b5563;
+  }
+  .product-card__desc{
+    font-size: .86rem;
+    color: #4b5563;
+  }
+
+  /* 底部区域：价格说明 + 按钮 */
+  .product-card__footer{
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .product-card__price{
+    font-size: .82rem;
+    color: #6b7280;
+  }
+
+  .product-card__actions{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  /* 按钮风格，和 US 一致 */
+  .btn-primary,
+  .btn-secondary{
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: .82rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .btn-primary{
+    background: #f97316;
+    color: #ffffff;
+  }
+  .btn-primary:hover{
+    background: #ea580c;
+  }
+
+  .btn-secondary{
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #d1d5db;
+  }
+  .btn-secondary:hover{
+    background: #f3f4f6;
+  }
+
+  /* 小屏时卡片间距略微调整 */
+  @media (max-width: 640px){
+    #productGrid{
+      gap: 16px;
+    }
+  }
+</style>
+
 <head>
   <meta charset="utf-8" />
   <title>Deep Review · Smart Picks FR — Amazon.fr Product Reviews & Guides</title>
