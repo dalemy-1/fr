@@ -261,6 +261,29 @@
       .btn-row{justify-content:flex-start}
     }
   </style>
+  <style>
+  /* 覆盖默认的图片样式，让商品图完整显示 */
+
+  .product-card__media{
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;          /* 保留圆角 */
+    background: #f9fafb;       /* 淡灰底，防止透明图发黑 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;              /* 给图片留一点内边距 */
+  }
+
+  .product-card__media img{
+    width: 100%;
+    height: auto;              /* 不再强制高度 */
+    max-height: 260px;         /* 控制最大高度，列表更整齐，可以按需要改 220/240 */
+    object-fit: contain;       /* 关键：等比完整显示图片，不裁切 */
+    display: block;
+  }
+</style>
+
 </head>
 <body>
 <header>
