@@ -640,6 +640,39 @@
         width: 100%;
       }
     }
+    /* 让 FR 卡片和 DE 站点一样紧凑的布局 */
+.product-grid {
+  /* 和 DE 一样，多一点列数、卡片更窄一点 */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+/* 卡片整体稍微缩小一些 */
+.product-card {
+  font-size: 0.8rem;
+  padding: 16px 14px 16px;
+}
+
+/* 图片区域高度限制，避免卡片被撑得太高 */
+.product-card__media {
+  padding-bottom: 10px;
+}
+
+.product-card__media img {
+  display: block;
+  width: 100%;
+  max-height: 210px;      /* 关键：控制图片高度，和 DE 视觉接近 */
+  object-fit: cover;
+}
+
+/* 底部按钮区再收紧一点间距，让整体高度一致 */
+.product-card__footer {
+  padding-top: 10px;
+}
+
+.product-card__actions {
+  gap: 6px;
+}
+
   </style>
 </head>
 
