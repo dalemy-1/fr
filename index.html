@@ -755,6 +755,46 @@
           <p style="margin-top:10px;font-size:0.78rem;color:#9ca3af;">
             Final pricing, availability and review scores are always determined by Amazon on their own pages.
           </p>
+          /* 让产品卡成为上下分区的弹性布局 */
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 图片下面这一块（标题 + 文案）占据上半部分，多了就滚下去，少了就撑满 */
+.product-card_body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 文案段落占满主体空间，后面的 footer 才能被推到底部 */
+.product-card_desc {
+  flex: 1;
+}
+
+/* 底部价格 + 按钮区永远贴在卡片底部，并且内部垂直排布整齐 */
+.product-card_footer {
+  margin-top: auto;          /* 关键：把 footer 推到卡片底部 */
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 按钮横向铺满，保证一行高度一致 */
+.product-card_actions {
+  display: flex;
+  gap: 8px;
+}
+
+.product-card_actions .btn-primary,
+.product-card_actions .btn-secondary {
+  flex: 1;           /* 两个按钮等宽 */
+  text-align: center;
+}
+
         </div>
       </aside>
     </section>
