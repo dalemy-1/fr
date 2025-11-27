@@ -3,12 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <title>FR Deep Review • Smart Picks FR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Editorial-style Amazon.fr product reviews & buying advice. Real ASINs with compliant affiliate links for French shoppers."
-  />
+  <meta name="description" content="Editorial-style Amazon.fr product reviews & buying advice. Real ASINs with compliant affiliate links for French shoppers.">
+
   <style>
+    /* 卡片统一高度 + 底部按钮对齐（FR） */
+    .product-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 图片下面这一块（标题 + 文案）占上半部分 */
+    .product-card__body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 文案段落占满主体空间，footer 才能被推到底部 */
+    .product-card__desc {
+      flex: 1;
+    }
+
+    /* 底部价格 + 按钮区永远贴在卡片底部 */
+    .product-card__footer {
+      margin-top: auto;   /* 关键：把 footer 推到底 */
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 按钮横向铺满 */
+    .product-card__actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .product-card__actions .btn-primary,
+    .product-card__actions .btn-secondary {
+      flex: 1;
+      text-align: center;
+    }
+
+    /* 下面再接你原来已有的样式，比如 :root {...}, body {...} 等 */
+    :root {
+      --bg: #f3f5fb;
+      --card-bg: #ffffff;
+      --accent: #ff7a59;
+      /* 其它变量... */
+    }
+
+    /* 你原本的 CSS 继续在这里… */
+  </style>
+</head>
     :root {
       --bg: #f3f5fb;
       --card-bg: #ffffff;
@@ -755,46 +803,6 @@
           <p style="margin-top:10px;font-size:0.78rem;color:#9ca3af;">
             Final pricing, availability and review scores are always determined by Amazon on their own pages.
           </p>
-          /* 让产品卡成为上下分区的弹性布局 */
-.product-card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 图片下面这一块（标题 + 文案）占据上半部分，多了就滚下去，少了就撑满 */
-.product-card_body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 文案段落占满主体空间，后面的 footer 才能被推到底部 */
-.product-card_desc {
-  flex: 1;
-}
-
-/* 底部价格 + 按钮区永远贴在卡片底部，并且内部垂直排布整齐 */
-.product-card_footer {
-  margin-top: auto;          /* 关键：把 footer 推到卡片底部 */
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* 按钮横向铺满，保证一行高度一致 */
-.product-card_actions {
-  display: flex;
-  gap: 8px;
-}
-
-.product-card_actions .btn-primary,
-.product-card_actions .btn-secondary {
-  flex: 1;           /* 两个按钮等宽 */
-  text-align: center;
-}
-
         </div>
       </aside>
     </section>
