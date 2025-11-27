@@ -2,244 +2,686 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>France Picks – Amazon.fr Affiliate Shortlist</title>
+  <title>fr Deep Review • Smart Picks FR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Curated Amazon.fr product picks with affiliate links. As an Amazon Associate we earn from qualifying purchases."
+    content="Editorial-style Amazon.fr product reviews & buying advice with real ASIN links. Not affiliated with Amazon."
   />
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-page: #eef1f7;
+      --bg-card: #ffffff;
+      --bg-card-soft: #f6f7fb;
+      --bg-dark: #0f172a;
+      --text-main: #111827;
+      --text-soft: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --accent-strong: #1d4ed8;
+      --border-subtle: #e5e7eb;
+      --chip-bg: #e5e7eb;
+      --chip-bg-active: #1d4ed8;
+      --chip-text-active: #ffffff;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.14);
+      --radius-lg: 18px;
+      --radius-xl: 22px;
+      --transition-fast: 0.18s ease-out;
+      --max-width: 1200px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #e0edff 0, #eef1f7 45%, #e5e7eb 100%);
+      color: var(--text-main);
+    }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-block { display: flex; flex-direction: column; gap: 2px; }
+    .site-title {
+      font-size: 1.05rem;
+      font-weight: 750;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .site-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .site-subtitle span { display: inline-flex; align-items: center; gap: 4px; }
+    .dot {
+      width: 3px; height: 3px; border-radius: 999px; background: #9ca3af;
+    }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-btn {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-soft);
+      transition: background var(--transition-fast),
+        color var(--transition-fast), border-color var(--transition-fast),
+        box-shadow var(--transition-fast), transform var(--transition-fast);
+    }
+    .nav-btn span.badge {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #f9fafb;
+    }
+    .nav-btn.primary {
+      border-color: rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.92);
+      color: #e5e7eb;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.45);
+    }
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(148, 163, 184, 0.5);
+      border-color: rgba(148, 163, 184, 0.9);
+      background: #ffffff;
+      color: #0f172a;
+    }
+    .nav-btn.primary:hover {
+      background: #020617;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.5);
+      color: #e5e7eb;
+    }
+    main {
+      max-width: var(--max-width);
+      margin: 12px auto 32px;
+      padding: 0 16px 32px;
+    }
+    .intro-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 10px;
+      margin-bottom: 18px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      padding: 18px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+    .card-soft {
+      background: radial-gradient(circle at top left, #0b1120 0, #020617 40%, #020617 100%);
+      color: #e5e7eb;
+    }
+    .card h1 { margin: 0 0 6px; font-size: 1.3rem; letter-spacing: 0.01em; }
+    .card p { margin: 4px 0; font-size: 0.85rem; color: var(--text-soft); }
+    .card-soft h2 { margin: 0 0 6px; font-size: 1.1rem; }
+    .card-soft p { color: #cbd5f5; font-size: 0.8rem; }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+    }
+    .badge-market {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.78rem;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.6);
+    }
+    .badge-market span.flag {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(
+  90deg,
+  #0055a4 0 33%,
+  #ffffff 33% 66%,
+  #ef4135 66% 100%
+);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.6);
+    }
+    .badge-soft { font-size: 0.78rem; color: #6b7280; }
+    .key-points {
+      margin-top: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: #6b7280;
+    }
+    .key-points span {
+      background: #e5e7eb;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .card-soft ul {
+      padding-left: 16px;
+      margin: 4px 0 0;
+      font-size: 0.8rem;
+    }
+    .card-soft li + li { margin-top: 4px; }
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      background: var(--chip-bg);
+      color: #374151;
+      cursor: pointer;
+      transition: background var(--transition-fast),
+        color var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+    .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 10px rgba(148, 163, 184, 0.55);
+      background: #e0e7ff;
+    }
+    .chip.active {
+      background: var(--chip-bg-active);
+      color: var(--chip-text-active);
+      border-color: rgba(15, 23, 42, 0.4);
+      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.5);
+    }
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .search-input {
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      padding: 7px 12px;
+      font-size: 0.8rem;
+      min-width: 220px;
+      max-width: 280px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 12px rgba(148, 163, 184, 0.3);
+    }
+    .btn-search {
+      border-radius: 999px;
+      border: none;
+      background: var(--accent-strong);
+      color: #f9fafb;
+      padding: 7px 16px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.6);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast);
+    }
+    .btn-search:hover {
+      transform: translateY(-1px);
+      background: #1d4ed8;
+      box-shadow: 0 12px 22px rgba(37, 99, 235, 0.7);
+    }
+    .product-count { font-size: 0.76rem; color: #6b7280; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+    .product-card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        border-color var(--transition-fast);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18);
+      border-color: rgba(37, 99, 235, 0.5);
+    }
+    .product-card_media {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: radial-gradient(circle at top, #e5edff 0, #c7d2fe 45%, #94a3b8 100%);
+      overflow: hidden;
+    }
+    .product-card_media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      mix-blend-mode: multiply;
+    }
+    .product-card_body {
+      padding: 10px 12px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .product-card_meta {
+      font-size: 0.76rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .meta-cat {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: #4b5563;
+    }
+    .meta-asin {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    }
+    .product-card_title { font-size: 0.95rem; margin: 0; }
+    .product-card_hook {
+      font-size: 0.8rem;
+      color: #4b5563;
+      margin: 0;
+    }
+    .product-card_desc {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin: 0;
+    }
+    .product-card_footer {
+      padding: 6px 12px 11px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .product-card_price { font-size: 0.8rem; color: #4b5563; }
+    .product-card_actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 0.78rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-card-soft);
+      color: #111827;
+      transition: background var(--transition-fast),
+        color var(--transition-fast), border-color var(--transition-fast),
+        box-shadow var(--transition-fast), transform var(--transition-fast);
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #e5e7eb;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 12px rgba(148, 163, 184, 0.5);
+    }
+    .btn-primary {
+      background: var(--accent-strong);
+      color: #f9fafb;
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.65);
+    }
+    .btn-primary:hover { background: #1d4ed8; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .info-card h3 { margin: 0 0 6px; font-size: 0.95rem; }
+    .info-card p,
+    .info-card li {
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+    .info-card ul { padding-left: 18px; margin: 4px 0 0; }
+    .info-card li + li { margin-top: 4px; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .modal-backdrop.visible { display: flex; }
+    .modal {
+      background: #020617;
+      color: #e5e7eb;
+      max-width: 520px;
+      width: calc(100% - 32px);
+      border-radius: 22px;
+      padding: 18px 18px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      position: relative;
+    }
+    .modal h2 { margin: 0 0 8px; font-size: 1.02rem; }
+    .modal p {
+      font-size: 0.82rem;
+      color: #e5e7eb;
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+    .modal-close {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      border-radius: 999px;
+      border: none;
+      width: 26px;
+      height: 26px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #9ca3af;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .modal-footer .btn { font-size: 0.8rem; padding-inline: 12px; }
+    @media (max-width: 860px) {
+      .intro-layout { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-nav { justify-content: flex-start; }
+      .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-row { justify-content: space-between; }
+      .search-input { flex: 1; min-width: 0; }
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-50">
-  <!-- Page wrapper -->
-  <div class="max-w-6xl mx-auto px-4 py-8 lg:py-12">
-    <!-- Header -->
-    <header class="mb-8 lg:mb-10 border-b border-slate-800 pb-6">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <p class="text-xs uppercase tracking-[0.25em] text-amber-400/80 mb-2">
-            France – Amazon.fr Picks
-          </p>
-          <h1 class="text-2xl lg:text-3xl font-semibold">
-            Hand-picked Amazon.fr product shortlist
-          </h1>
-          <p class="mt-2 text-sm text-slate-300 max-w-2xl">
-            This page lists a curated selection of products available on Amazon.fr.
-            All outbound product buttons marked as Amazon links are affiliate links.
-            As an Amazon Associate we earn from qualifying purchases. Prices and availability
-            are subject to change; always refer to the product page on Amazon.fr for the latest details.
-          </p>
-        </div>
-
-        <div class="text-xs text-slate-400 space-y-1">
-          <p><span class="font-semibold text-slate-200">Marketplace:</span> Amazon.fr (France)</p>
-          <p><span class="font-semibold text-slate-200">Amazon Associates ID:</span> fr0e28-21</p>
-          <p><span class="font-semibold text-slate-200">Contact:</span> <a href="mailto:dalemy888@sina.com" class="underline hover:text-amber-300">dalemy888@sina.com</a></p>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand-block">
+        <div class="site-title">de Deep Review • Smart Picks DE</div>
+        <div class="site-subtitle">
+          <span>Editorial-style Amazon.fr product reviews &amp; buying advice</span>
+          <span class="dot"></span>
+          <span>Not affiliated with Amazon.</span>
         </div>
       </div>
-
-      <!-- Simple nav -->
-      <nav class="mt-4 flex flex-wrap gap-3 text-xs text-slate-300">
-        <a href="https://dalemy-1.github.io/" class="px-2 py-1 rounded-full bg-slate-800/80 hover:bg-slate-700">Back to main hub</a>
-        <a href="#guide" class="px-2 py-1 rounded-full bg-slate-900/80 hover:bg-slate-800">Buying guide</a>
-        <a href="#disclosure" class="px-2 py-1 rounded-full bg-slate-900/80 hover:bg-slate-800">Affiliate disclosure</a>
-        <a href="#privacy" class="px-2 py-1 rounded-full bg-slate-900/80 hover:bg-slate-800">Privacy</a>
-      </nav>
-    </header>
-
-    <!-- Product grid section -->
-    <section class="mb-10">
-      <div class="flex items-baseline justify-between mb-4">
-        <div>
-          <h2 class="text-lg font-semibold">Featured products for France</h2>
-          <p class="text-xs text-slate-400">
-            Editorial shortlist with direct Amazon.fr affiliate links.
-          </p>
-        </div>
-        <p class="text-[11px] text-slate-500">
-          Click “Read review” to open a quick editorial note in a popup,
-          or “Go to Amazon” to open the product page on Amazon.fr.
-        </p>
-      </div>
-
-      <!-- Product grid -->
-      <div id="product-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <!-- === PRODUCT CARD START === -->
-        <!-- 示例 1：你只需要复制这一块，改 img/asins/links 即可 -->
-
-        <article class="group bg-slate-900/70 border border-slate-800 rounded-2xl flex flex-col overflow-hidden hover:border-amber-400/70 hover:-translate-y-1 hover:shadow-xl transition">
-          <div class="relative aspect-[4/3] overflow-hidden bg-slate-800">
-            <img
-              src="https://m.media-amazon.com/images/I/81ji0Wi0N7L._AC_SY500_.jpg"
-              alt="Amazon.fr product example 1"
-              loading="lazy"
-              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="flex flex-col flex-1 p-4 gap-3">
-            <div>
-              <p class="text-[10px] uppercase tracking-[0.22em] text-amber-400/80 mb-1">
-                Amazon.fr pick
-              </p>
-              <h3 class="text-sm font-semibold text-slate-50 line-clamp-2">
-                Product #1 – Selected item from Amazon.fr
-              </h3>
-            </div>
-            <p class="text-xs text-slate-300/90 flex-1 line-clamp-3">
-              This product is part of our France shortlist on Amazon.fr.
-              It has been selected as a representative example of what shoppers frequently look for.
-              For full specifications, sizing details and live customer reviews, please visit the product page on Amazon.
-            </p>
-            <div class="mt-2 flex flex-wrap gap-2">
-              <!-- 这个 Read review 将被 JS 接管，弹出点评弹窗 -->
-              <a
-                href="https://www.amazon.fr/dp/B0FQ1GL733/?tag=fr0e28-21"
-                class="inline-flex items-center justify-center px-3 py-1.5 rounded-xl text-[11px] font-medium border border-slate-500/70 text-slate-100 hover:bg-slate-800/80"
-              >
-                Read review
-              </a>
-
-              <!-- 这个按钮保留为直接跳转亚马逊 -->
-              <a
-                href="https://www.amazon.fr/dp/B0FQ1GL733/?tag=fr0e28-21"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-                class="inline-flex items-center justify-center px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-amber-400 text-slate-950 hover:bg-amber-300"
-              >
-                Go to Amazon
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 示例 2：第二个商品示例 -->
-        <article class="group bg-slate-900/70 border border-slate-800 rounded-2xl flex flex-col overflow-hidden hover:border-amber-400/70 hover:-translate-y-1 hover:shadow-xl transition">
-          <div class="relative aspect-[4/3] overflow-hidden bg-slate-800">
-            <img
-              src="https://m.media-amazon.com/images/I/61V2MCYWmdL._AC_SY500_.jpg"
-              alt="Amazon.fr product example 2"
-              loading="lazy"
-              class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-          <div class="flex flex-col flex-1 p-4 gap-3">
-            <div>
-              <p class="text-[10px] uppercase tracking-[0.22em] text-amber-400/80 mb-1">
-                Amazon.fr pick
-              </p>
-              <h3 class="text-sm font-semibold text-slate-50 line-clamp-2">
-                Product #2 – Highlight from Amazon.fr
-              </h3>
-            </div>
-            <p class="text-xs text-slate-300/90 flex-1 line-clamp-3">
-              Another curated product included in this France-focused listing.
-              We keep the on-page description general so that it never conflicts with live product information.
-              Always rely on the Amazon.fr product page for technical details, up-to-date pricing and user ratings.
-            </p>
-            <div class="mt-2 flex flex-wrap gap-2">
-              <a
-                href="https://www.amazon.fr/dp/B0C6F6S8B7/?tag=fr0e28-21"
-                class="inline-flex items-center justify-center px-3 py-1.5 rounded-xl text-[11px] font-medium border border-slate-500/70 text-slate-100 hover:bg-slate-800/80"
-              >
-                Read review
-              </a>
-              <a
-                href="https://www.amazon.fr/dp/B0C6F6S8B7/?tag=fr0e28-21"
-                target="_blank"
-                rel="nofollow sponsored noopener"
-                class="inline-flex items-center justify-center px-3 py-1.5 rounded-xl text-[11px] font-semibold bg-amber-400 text-slate-950 hover:bg-amber-300"
-              >
-                Go to Amazon
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 在这里继续复制上面的 <article>，把图片链接 + ASIN + tag 改成你 FR 列表里的所有产品 -->
-        <!-- === PRODUCT CARD END === -->
-      </div>
-    </section>
-
-    <!-- Buying guide / disclosure / privacy -->
-    <section id="guide" class="mb-8 space-y-4 text-sm text-slate-200">
-      <h2 class="text-lg font-semibold">How to use this France product shortlist</h2>
-      <p>
-        This page is designed as a quick starting point for shoppers using Amazon.fr. We do not try to
-        replace the full product descriptions on Amazon. Instead, we provide a compact selection of items
-        and simple editorial notes, then link you directly to the product pages.
-      </p>
-      <p>
-        The items shown here were chosen based on general popularity, typical use-cases and overall
-        customer interest. We intentionally keep our text neutral and non-technical so that it never
-        conflicts with live data on Amazon.fr.
-      </p>
-    </section>
-
-    <section id="disclosure" class="mb-8 text-sm text-slate-200 space-y-3">
-      <h2 class="text-lg font-semibold">Affiliate disclosure</h2>
-      <p>
-        This website participates in the Amazon Associates Program for Amazon.fr. When you click on
-        buttons such as “Go to Amazon” or other Amazon-labelled links and then make a purchase,
-        we may earn a commission at no additional cost to you.
-      </p>
-      <p>
-        All prices, availability information, delivery times and customer ratings are provided solely by
-        Amazon.fr and may change at any time. Always check the product page on Amazon.fr for the most
-        accurate and up-to-date information before completing a purchase.
-      </p>
-    </section>
-
-    <section id="privacy" class="mb-10 text-sm text-slate-200 space-y-3">
-      <h2 class="text-lg font-semibold">Privacy and data</h2>
-      <p>
-        This page itself does not collect personal data, store payment details or handle orders. All
-        transactions are processed securely on Amazon.fr. We may use anonymous analytics or server logs
-        to understand basic traffic patterns, but we do not attempt to identify individual visitors.
-      </p>
-      <p>
-        If you have any questions about this page or would like to reach the site owner, please contact:
-        <a href="mailto:dalemy888@sina.com" class="underline hover:text-amber-300">dalemy888@sina.com</a>.
-      </p>
-    </section>
-  </div>
-
-  <!-- ================= Review Modal + JS ================= -->
-
-  <!-- Review Modal -->
-  <div
-    id="review-modal"
-    class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center z-50"
-  >
-    <div class="bg-slate-900 text-slate-50 max-w-lg w-[90%] rounded-2xl shadow-2xl p-6 relative">
-      <button
-        type="button"
-        id="review-modal-close"
-        class="absolute right-4 top-4 text-slate-400 hover:text-slate-100 text-xl leading-none"
-        aria-label="Close review"
-      >
-        &times;
-      </button>
-
-      <h3 id="review-modal-title" class="text-xl font-semibold mb-3"></h3>
-
-      <p id="review-modal-body" class="text-sm leading-relaxed text-slate-100/90 whitespace-pre-line"></p>
-
-      <div class="mt-6 flex justify-end gap-3">
-        <button
-          type="button"
-          class="px-4 py-2 rounded-xl border border-slate-600 text-slate-100 text-sm hover:bg-slate-800"
-          onclick="window.__closeReviewModal && window.__closeReviewModal()"
-        >
-          Close
+      <div class="top-nav">
+        <button class="nav-btn" onclick="window.location.href='https://dalemy-1.github.io/'">
+          Home
         </button>
+        <button class="nav-btn">Buying Guide</button>
+        <button class="nav-btn">About</button>
+        <button class="nav-btn">Privacy</button>
+        <button class="nav-btn primary">
+          <span>Affiliate Disclosure</span>
+          <span class="badge">DE</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section class="intro-layout">
+      <article class="card">
+        <h1>Amazon.fr product cards with real ASIN links.</h1>
+        <p>
+          As an Amazon Associate I earn from qualifying purchases.
+          Some links on this page are affiliate links.
+        </p>
+        <p>
+          This page uses real Amazon.fr ASINs and editorial-style summaries,
+          displayed in a grid that is designed to be friendly for Amazon Associates.
+          Each card leads directly to the matching product page on Amazon.fr with the
+          affiliate tag applied.
+        </p>
+        <div class="meta-row">
+          <span class="badge-market">
+            <span class="flag" aria-hidden="true"></span>
+            <span>DE</span>
+            <span>Associates ID: de0831-21</span>
+          </span>
+          <span class="badge-soft">
+            5 broad usage categories &bull; Real product images &amp; ASINs &bull;
+            Direct /dp/ links with tag
+          </span>
+        </div>
+        <div class="key-points">
+          <span>Electronics &amp; Gadgets</span>
+          <span>Home &amp; Kitchen</span>
+          <span>Outdoor &amp; Sports</span>
+          <span>Car Accessories</span>
+          <span>Office &amp; Daily Use</span>
+        </div>
+      </article>
+
+      <aside class="card card-soft">
+        <h2>How to use this shortlist</h2>
+        <p>
+          Each product card gives you a short editorial-style note plus a direct
+          link to the live Amazon.de product page. Treat this page as a curated
+          shortlist, not a replacement for reading the full details and reviews
+          on Amazon.
+        </p>
+        <ul>
+          <li>
+            Use the category chips or focus buttons to narrow down your view by
+            everyday usage.
+          </li>
+          <li>
+            Use the search bar for ASIN, simple keywords or rough product names.
+          </li>
+          <li>
+            Click <strong>"Read review"</strong> to open an on-page editorial
+            style note.
+          </li>
+          <li>
+            Click <strong>"Go to Amazon"</strong> to see full details, current
+            pricing and customer reviews.
+          </li>
+        </ul>
+        <p>
+          Final pricing, availability and review scores are always determined by
+          Amazon.de on their own pages.
+        </p>
+      </aside>
+    </section>
+
+    <section class="controls-bar">
+      <div class="chip-row" id="categoryChips">
+        <button class="chip active" data-category="All picks">All picks</button>
+        <button class="chip" data-category="Electronics &amp; Gadgets">
+          Electronics &amp; Gadgets
+        </button>
+        <button class="chip" data-category="Home &amp; Kitchen">Home &amp; Kitchen</button>
+        <button class="chip" data-category="Outdoor &amp; Sports">
+          Outdoor &amp; Sports
+        </button>
+        <button class="chip" data-category="Car Accessories">
+          Car Accessories
+        </button>
+        <button class="chip" data-category="Office &amp; Daily Use">
+          Office &amp; Daily Use
+        </button>
+      </div>
+
+      <div class="search-row">
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search by title, category or ASIN on this page..."
+        />
+        <button class="btn-search" id="searchBtn">
+          <span>Search</span>
+        </button>
+        <span class="product-count" id="productCount">Showing 0 products</span>
+      </div>
+    </section>
+
+    <section class="grid" id="productGrid"></section>
+
+    <section class="info-grid">
+      <article class="card info-card">
+        <h3>Buying guide: three quick checks before you order</h3>
+        <ul>
+          <li>
+            <strong>Usage context:</strong> will you use it daily, weekly or only on trips?
+          </li>
+          <li>
+            <strong>Budget tier:</strong> are you aiming for entry-level, mid-range or premium?
+          </li>
+          <li>
+            <strong>Top 2–3 priorities:</strong> for example comfort, durability,
+            speed, battery life or cleaning effort.
+          </li>
+        </ul>
+        <p>
+          Each card on this page is written to help you think about those questions
+          so you can quickly decide whether a product might be a “good-enough fit”
+          before opening the full details on Amazon.
+        </p>
+      </article>
+
+      <article class="card info-card">
+        <h3>About this DE shortlist</h3>
+        <p>
+          All products on this page are selected from Amazon.de using publicly
+          available information such as product descriptions, feature lists and
+          typical German usage scenarios. The focus is on clear, balanced everyday
+          picks rather than chasing only the newest or most expensive models.
+        </p>
+        <p>
+          We do not claim that any single item here is objectively the “best”
+          choice for everyone. Instead, each entry is a snapshot of a product that
+          could be a reasonable option for French shoppers when matched to the
+          right person and budget.
+        </p>
+      </article>
+
+      <article class="card info-card">
+        <h3>Privacy &amp; data</h3>
+        <p>
+          This site does not collect payment details or process orders. All
+          transactions take place on Amazon.de or other third-party sites after
+          you click through an external link.
+        </p>
+        <p>
+          Basic traffic analytics may be used to understand anonymous page usage
+          such as page views and clicks. For the latest information on how your
+          data is handled, please always check the privacy policy and terms of use
+          on Amazon.de.
+        </p>
+      </article>
+
+      <article class="card info-card">
+        <h3>Affiliate disclosure</h3>
+        <p>
+          Deep Review • Smart Picks DE participates in the Amazon Associates
+          Program. This means that we may earn a small commission on qualifying
+          purchases made through links marked as Amazon affiliate links, at no
+          additional cost to you.
+        </p>
+        <p>
+          Product selection and editorial notes are created independently and are
+          not endorsed or pre-approved by Amazon. Prices, availability and
+          promotional offers can change at any time; only the information shown on
+          Amazon.de at the moment of your visit is considered current.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="reviewModalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+      <button class="modal-close" id="reviewModalClose" aria-label="Close review window">
+        ×
+      </button>
+      <h2 id="reviewModalTitle">Product review</h2>
+      <p id="reviewModalBody"></p>
+      <div class="modal-footer">
+        <button class="btn" id="reviewModalDismiss">Close</button>
         <a
-          id="review-modal-amazon-link"
           href="#"
           target="_blank"
-          rel="nofollow sponsored noopener"
-          class="px-4 py-2 rounded-xl bg-amber-400 text-slate-900 font-semibold text-sm hover:bg-amber-300"
+          rel="nofollow noopener sponsored"
+          class="btn btn-primary"
+          id="reviewModalAmazonLink"
         >
           Go to Amazon
         </a>
@@ -248,96 +690,253 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var modal = document.getElementById('review-modal');
-      if (!modal) return;
+    const AMAZON_DOMAIN = "www.amazon.fr";
+    const AFFILIATE_TAG = "fr0e28-21";
 
-      var modalTitle = document.getElementById('review-modal-title');
-      var modalBody = document.getElementById('review-modal-body');
-      var modalAmazonLink = document.getElementById('review-modal-amazon-link');
-      var modalCloseBtn = document.getElementById('review-modal-close');
+    const baseCategories = ["Electronics", "Home", "Outdoor", "Car", "Office"];
 
-      function openModalFromCard(card, amazonHref) {
-        if (!card) return;
+    const rawProductsBase = [
+  { asin: "B0FQ1GL733", image: "https://m.media-amazon.com/images/I/81ji0Wi0N7L._AC_SY500_.jpg" },
+  { asin: "B0C6F6S8B7", image: "https://m.media-amazon.com/images/I/61V2MCYWmdL._AC_SY500_.jpg" },
+  { asin: "B0FMRP7DD7", image: "https://m.media-amazon.com/images/I/61x+LbagnPL._AC_SX569_.jpg" },
+  { asin: "B0FFMBK31G", image: "https://m.media-amazon.com/images/I/61rd3y9wh6L._AC_SX679_.jpg" },
+  { asin: "B0FPM59XFY", image: "https://m.media-amazon.com/images/I/71z8iM5kvjL._AC_SX522_.jpg" },
+  { asin: "B0FMK2HZTB", image: "https://m.media-amazon.com/images/I/71hn6SDt9aL._AC_SX522_.jpg" },
+  { asin: "B0D5CTCT6P", image: "https://m.media-amazon.com/images/I/91QBaSjAo8L._AC_SY300_SX300_QL70_ML2_.jpg" },
+  { asin: "B0D6VKS1JV", image: "https://m.media-amazon.com/images/I/61wifIYOsQL._AC_SY575_.jpg" },
+  { asin: "B0FM3X4GD1", image: "https://m.media-amazon.com/images/I/71ewzCslWvL._AC_SX522_.jpg" },
+  { asin: "B0FFMWWWQ8", image: "https://m.media-amazon.com/images/I/71VbFvQ-ibL._AC_SX569_.jpg" },
+  { asin: "B0DF58SW2Y", image: "https://m.media-amazon.com/images/I/61WRm+ue9LL._AC_SX569_.jpg" },
+  { asin: "B0FD2CJ9S4", image: "https://m.media-amazon.com/images/I/61EKToAK3yL._AC_SY355_.jpg" },
+  { asin: "B0FNJZXJJX", image: "https://m.media-amazon.com/images/I/61dZo2B1FPL._AC_SX569_.jpg" },
+  { asin: "B0FR4VSZR8", image: "https://m.media-amazon.com/images/I/713kI0tajCL._AC_SX522_.jpg" },
+  { asin: "B0FHPBB65X", image: "https://m.media-amazon.com/images/I/61CzHQi14OL._AC_SX522_.jpg" },
+  { asin: "B0DDRFJ9CZ", image: "https://m.media-amazon.com/images/I/714mJIiMOQL._AC_SY575_.jpg" },
+  { asin: "B0DF2RDTBH", image: "https://m.media-amazon.com/images/I/61q924SwZuL._AC_SY575_.jpg" },
+  { asin: "B0FSCYD2X8", image: "https://m.media-amazon.com/images/I/41BveLVVWoL._AC_SX522_.jpg" },
+  { asin: "B0FG7TG354", image: "https://m.media-amazon.com/images/I/81saC26nuLL._AC_SX569_.jpg" },
+  { asin: "B0FK2FVF7D", image: "https://m.media-amazon.com/images/I/41McuCtla5L._AC_.jpg" },
+  { asin: "B0FDG63ZM3", image: "https://m.media-amazon.com/images/I/61opL86XNZL._AC_SX522_.jpg" },
+  { asin: "B0FQMW3YHD", image: "https://m.media-amazon.com/images/I/71xg7+JeV4L._AC_SY500_.jpg" },
+  { asin: "B0FQNXDD71", image: "https://m.media-amazon.com/images/I/51wLOAodGRL._AC_.jpg" },
+  { asin: "B0FJDQQM9Q", image: "https://m.media-amazon.com/images/I/51N17adb-RL._AC_SY355_.jpg" },
+  { asin: "B0DFNTXSQH", image: "https://m.media-amazon.com/images/I/81caQP5gUhL._AC_SX679_.jpg" },
+  { asin: "B0CBJDV9R8", image: "https://m.media-amazon.com/images/I/71T84LDQ31L._AC_SX522_.jpg" },
+  { asin: "B0FG7Y3GQ1", image: "https://m.media-amazon.com/images/I/61t2hS0YNHL._AC_SY575_.jpg" },
+  { asin: "B0FK4NVHT3", image: "https://m.media-amazon.com/images/I/611o27lMKaL._AC_SY355_.jpg" },
+  { asin: "B0FNJWK4MT", image: "https://m.media-amazon.com/images/I/71zjuIBbi9L._AC_SX425_.jpg" },
+  { asin: "B095HC4R32", image: "https://m.media-amazon.com/images/I/51vWSFuQ+iS._AC_SX679_.jpg" },
+  { asin: "B0FGWNKQ2B", image: "https://m.media-amazon.com/images/I/61gP+IVBEQL._AC_SX425_.jpg" },
+  { asin: "B0FFB39ZZN", image: "https://m.media-amazon.com/images/I/61S3g9N58UL._AC_SY355_.jpg" },
+  { asin: "B0FB3FSM59", image: "https://m.media-amazon.com/images/I/61huj+1E77L._AC_SX679_.jpg" },
+  { asin: "B0FK49425H", image: "https://m.media-amazon.com/images/I/71td6PBIE4L._AC_SX522_.jpg" },
+  { asin: "B0F84B1HM1", image: "https://m.media-amazon.com/images/I/61aOhG2hB5L._AC_SX679_.jpg" },
+  { asin: "B0FLPBHTHC", image: "https://m.media-amazon.com/images/I/61mttFSCXOL._AC_SY575_.jpg" },
+  { asin: "B0FFMFRZ98", image: "https://m.media-amazon.com/images/I/71gyHwlHmmL._AC_SX522_.jpg" },
+  { asin: "B0F9PD3H66", image: "https://m.media-amazon.com/images/I/515tON-Q53L._AC_SY575_.jpg" },
+  { asin: "B0DZCMXQ7T", image: "https://m.media-amazon.com/images/I/61jTVXrsndL._AC_SY500_.jpg" },
+  { asin: "B0FXDRN7DS", image: "https://m.media-amazon.com/images/I/71nJCfZI22L._AC_SY500_.jpg" },
+  { asin: "B0DL3DMQY2", image: "https://m.media-amazon.com/images/I/5107IhIRiML._AC_SX569_.jpg" },
+  { asin: "B0FRM8KCNC", image: "https://m.media-amazon.com/images/I/51dcgYvHeBL._AC_SX679_.jpg" },
+  { asin: "B0FRYV9ZP4", image: "https://m.media-amazon.com/images/I/51MOEqb58XL._AC_SX679_.jpg" },
+  { asin: "B0FH642T9W", image: "https://m.media-amazon.com/images/I/714qU0wCuOL._AC_SX569_.jpg" },
+  { asin: "B0FS1TDJ42", image: "https://m.media-amazon.com/images/I/712+M0dlBIL._AC_SX679_.jpg" },
+  { asin: "B0DCG2KX4N", image: "https://m.media-amazon.com/images/I/81AZa9hKelL._AC_SY355_.jpg" },
+  { asin: "B0FMRQ1PR1", image: "https://m.media-amazon.com/images/I/711q3wCOAPL._AC_SX569_.jpg" },
+  { asin: "B0FNVS4RWC", image: "https://m.media-amazon.com/images/I/71FGWxoN1oL._AC_SX679_.jpg" },
+  { asin: "B0FS1RDGWZ", image: "https://m.media-amazon.com/images/I/71cwKfhstmL._AC_SX679_.jpg" },
+  { asin: "B0FC2HWYKY", image: "https://m.media-amazon.com/images/I/81SUOujJvOL._AC_SX425_.jpg" },
+  { asin: "B0FDBCMVC8", image: "https://m.media-amazon.com/images/I/71wkiZNyaKL._AC_SX425_.jpg" },
+  { asin: "B0FDQJQWQG", image: "https://m.media-amazon.com/images/I/61RbPQwcvYL._AC_SX425_.jpg" },
+  { asin: "B0FFN4QV78", image: "https://m.media-amazon.com/images/I/71psz4BNoBL._AC_SX569_.jpg" },
+  { asin: "B0FVVXV92D", image: "https://m.media-amazon.com/images/I/71k7vryVDGL._AC_SX569_.jpg" },
+  { asin: "B0FRF5LYSR", image: "https://m.media-amazon.com/images/I/61AZYiunCgL._SX342_.jpg" },
+  { asin: "B0FLXBNFS1", image: "https://m.media-amazon.com/images/I/7119F3mcyrL._AC_SX569_.jpg" },
+  { asin: "B0FN8GK19M", image: "https://m.media-amazon.com/images/I/61IXxBfLHJL._AC_SX425_.jpg" },
+  { asin: "B0FK2GF6MR", image: "https://m.media-amazon.com/images/I/71Z66LmHnSL._AC_SX466_.jpg" },
+  { asin: "B0FHW7N6V6", image: "https://m.media-amazon.com/images/I/718EKQyet8L._AC_SX425_.jpg" },
+  { asin: "B0FDG38D19", image: "https://m.media-amazon.com/images/I/71f3ZFekBqL._AC_SX569_.jpg" },
+  { asin: "B0F9K19FVM", image: "https://m.media-amazon.com/images/I/81-hYME9FdL._AC_SY500_.jpg" }
+];
 
-        // 标题：卡片内的 h3
-        var titleEl = card.querySelector('h3');
-        var title = titleEl ? titleEl.textContent.trim() : 'Product review';
+    const rawProducts = rawProductsBase.map((p, index) => ({
+      id: index + 1,
+      asin: p.asin,
+      image: p.image,
+      category: baseCategories[index % baseCategories.length]
+    }));
 
-        // 通用、不会出错的评论文案（不写具体功能，避免与商品不一致）
-        var bodyText =
-          'Short editorial note for this Amazon.fr product:\\n\\n' +
-          '- This item is part of a curated shortlist created for French shoppers.\\n' +
-          '- The text on this page is intentionally simple so that it never conflicts with the live details on Amazon.fr.\\n' +
-          '- For exact specifications, sizes, colour options, current price and full customer reviews, please open the product page on Amazon.';
+    const CATEGORY_MAP = {
+      Electronics: "Electronics & Gadgets",
+      Audio: "Electronics & Gadgets",
+      Home: "Home & Kitchen",
+      Kitchen: "Home & Kitchen",
+      Outdoor: "Outdoor & Sports",
+      Sports: "Outdoor & Sports",
+      Car: "Car Accessories",
+      Office: "Office & Daily Use",
+      Other: "Office & Daily Use"
+    };
 
-        modalTitle.textContent = title;
-        modalBody.textContent = bodyText.replace(/\\n/g, '\\n');
-
-        if (amazonHref) {
-          modalAmazonLink.href = amazonHref;
-        } else {
-          modalAmazonLink.href = '#';
-        }
-
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-
-      function closeModal() {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-
-      window.__closeReviewModal = closeModal;
-
-      if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeModal);
-      }
-
-      modal.addEventListener('click', function (event) {
-        if (event.target === modal) {
-          closeModal();
-        }
-      });
-
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-          closeModal();
-        }
-      });
-
-      // 接管所有 “Read review” 链接
-      var allLinks = Array.prototype.slice.call(document.querySelectorAll('a'));
-      allLinks.forEach(function (link) {
-        if (link.textContent.trim() === 'Read review') {
-          link.addEventListener('click', function (event) {
-            event.preventDefault();
-
-            var card = link.closest('article');
-            if (!card) return;
-
-            // 找当前卡片内 “Go to Amazon” 链接，用作弹窗中的真正 amazon 链接
-            var amazonLinkInCard = null;
-            var innerLinks = card.querySelectorAll('a');
-            for (var i = 0; i < innerLinks.length; i++) {
-              var txt = innerLinks[i].textContent.trim();
-              if (
-                txt === 'Go to Amazon' ||
-                txt === 'View on Amazon' ||
-                txt === 'View details on Amazon'
-              ) {
-                amazonLinkInCard = innerLinks[i];
-                break;
-              }
-            }
-
-            var finalHref = amazonLinkInCard ? amazonLinkInCard.href : link.href;
-            openModalFromCard(card, finalHref);
-          });
-        }
-      });
+    const products = rawProducts.map((p, index) => {
+      const broadCat = CATEGORY_MAP[p.category] || "Office & Daily Use";
+      const title = `Product #${index + 1} – ${broadCat} Pick`;
+      const hook =
+        `This pick is designed as a practical option in the ${broadCat.toLowerCase()} space for French shoppers, balancing everyday performance and value.`;
+      const details =
+        "Use this shortlist as a quick way to spot products that may deserve a closer look on Amazon.de. Each card focuses on simple fit, features and everyday German use rather than chasing extreme specs.";
+      const approxPriceLabel = "Check live price on Amazon.fr";
+      const amazonUrl = `https://${AMAZON_DOMAIN}/dp/${p.asin}/?tag=${AFFILIATE_TAG}`;
+      const reviewText =
+        `${title}\n\n` +
+        `This France-focused editorial note highlights key reasons why this item might be a good fit:\n` +
+        `• Everyday use: aimed at typical home or personal use rather than specialist scenarios.\n` +
+        `• Effort vs. benefit: chosen where setup, maintenance and day-to-day use feel reasonable for most people.\n` +
+        `• Value: not always the absolute cheapest, but offering a sensible balance of features for the price.\n\n` +
+        `Always open the full Amazon.de product page to check the latest details, compatibility notes and customer reviews before you decide.`;
+      return {
+        ...p,
+        broadCategory: broadCat,
+        title,
+        hook,
+        details,
+        approxPriceLabel,
+        amazonUrl,
+        reviewText
+      };
     });
+
+    const gridEl = document.getElementById("productGrid");
+    const countEl = document.getElementById("productCount");
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const chipsContainer = document.getElementById("categoryChips");
+
+    const modalBackdrop = document.getElementById("reviewModalBackdrop");
+    const modalTitle = document.getElementById("reviewModalTitle");
+    const modalBody = document.getElementById("reviewModalBody");
+    const modalAmazonLink = document.getElementById("reviewModalAmazonLink");
+    const modalClose = document.getElementById("reviewModalClose");
+    const modalDismiss = document.getElementById("reviewModalDismiss");
+
+    let activeCategory = "All picks";
+    let searchTerm = "";
+
+    function renderProducts(list) {
+      gridEl.innerHTML = "";
+      if (!list.length) {
+        gridEl.innerHTML =
+          '<div style="font-size:0.85rem;color:#6b7280;padding:10px 4px;">No products match your current filters. Try clearing the search or choosing “All picks”.</div>';
+      } else {
+        list.forEach((p) => {
+          const card = document.createElement("article");
+          card.className = "product-card";
+          card.innerHTML = `
+            <div class="product-card_media">
+              <img src="${p.image}" alt="${p.title}" loading="lazy" />
+            </div>
+            <div class="product-card_body">
+              <div class="product-card_meta">
+                <span class="meta-cat">${p.broadCategory}</span>
+                <span class="meta-asin">ASIN: ${p.asin}</span>
+              </div>
+              <h3 class="product-card_title">${p.title}</h3>
+              <p class="product-card_hook">${p.hook}</p>
+              <p class="product-card_desc">${p.details}</p>
+            </div>
+            <div class="product-card_footer">
+              <div class="product-card_price">${p.approxPriceLabel}</div>
+              <div class="product-card_actions">
+                <button class="btn btn-secondary" data-action="review" data-asin="${p.asin}">
+                  Read review
+                </button>
+                <a class="btn btn-primary" href="${p.amazonUrl}" target="_blank" rel="nofollow noopener sponsored">
+                  Go to Amazon
+                </a>
+              </div>
+            </div>
+          `;
+          gridEl.appendChild(card);
+        });
+      }
+      if (countEl) {
+        countEl.textContent = `Showing ${list.length} products`;
+      }
+    }
+
+    function getFilteredProducts() {
+      const term = searchTerm.trim().toLowerCase();
+      return products.filter((p) => {
+        const matchesCategory =
+          activeCategory === "All picks" || p.broadCategory === activeCategory;
+        const haystack = `${p.title} ${p.asin} ${p.broadCategory} ${p.category}`.toLowerCase();
+        const matchesSearch = !term || haystack.includes(term);
+        return matchesCategory && matchesSearch;
+      });
+    }
+
+    function applyFilters() { renderProducts(getFilteredProducts()); }
+
+    function setActiveChip(categoryLabel) {
+      activeCategory = categoryLabel;
+      const chips = chipsContainer.querySelectorAll(".chip");
+      chips.forEach((chip) => {
+        chip.classList.toggle("active", chip.dataset.category === categoryLabel);
+      });
+      applyFilters();
+    }
+
+    chipsContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest(".chip");
+      if (!btn) return;
+      const cat = btn.dataset.category;
+      if (cat) setActiveChip(cat);
+    });
+
+    function handleSearch() {
+      searchTerm = searchInput.value || "";
+      applyFilters();
+    }
+
+    searchBtn.addEventListener("click", handleSearch);
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") handleSearch();
+    });
+
+    gridEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-action='review']");
+      if (!btn) return;
+      const asin = btn.dataset.asin;
+      const product = products.find((p) => p.asin === asin);
+      if (product) openReviewModal(product);
+    });
+
+    function openReviewModal(product) {
+      modalTitle.textContent = product.title.replace(
+        "Pick",
+        "– Selected item from Amazon.de"
+      );
+      modalBody.textContent = product.reviewText;
+      modalAmazonLink.href = product.amazonUrl;
+      modalBackdrop.classList.add("visible");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+    }
+
+    function closeReviewModal() {
+      modalBackdrop.classList.remove("visible");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    modalClose.addEventListener("click", closeReviewModal);
+    modalDismiss.addEventListener("click", closeReviewModal);
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeReviewModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeReviewModal();
+    });
+
+    renderProducts(products);
   </script>
 </body>
 </html>
