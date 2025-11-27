@@ -412,7 +412,7 @@
     .product-card_body {
       display: flex;
       flex-direction: column;
-      flex: 1; /* 让正文区占满中间空间 */
+      flex: 1;
     }
 
     .product-card_meta {
@@ -447,11 +447,11 @@
       font-size: 0.78rem;
       color: #6b7280;
       margin: 0;
-      flex: 1; /* 填充剩余空间，把 footer 顶到底部 */
+      flex: 1;
     }
 
     .product-card_footer {
-      margin-top: auto;              /* 关键：把 footer 推到卡片底部 */
+      margin-top: auto;
       padding-top: 10px;
       border-top: 1px solid rgba(209, 213, 219, 0.6);
       display: flex;
@@ -811,82 +811,92 @@
     const AFFILIATE_ID = "fr0e28-21";
     const AMAZON_DOMAIN = "https://www.amazon.fr";
 
-    /* --------------- 1. 原始产品数据：在这里追加你所有 FR ASIN + 图片 -------------- */
+    /* ---------------- 1. 原始产品数据（所有 FR ASIN + 图片） ---------------- */
+
     const rawProducts = [
-      {
-        id: 1,
-        asin: "B0FQ1GL733",
-        category: "Electronics & Gadgets",
-        image: "https://m.media-amazon.com/images/I/81ji0Wi0N7L._AC_SY500_.jpg"
-      },
-      {
-        id: 2,
-        asin: "B0C6F6S8B7",
-        category: "Electronics & Gadgets",
-        image: "https://m.media-amazon.com/images/I/61V2MCYWmdL._AC_SY500_.jpg"
-      },
-      {
-        id: 3,
-        asin: "B0FMRP7DD7",
-        category: "Home & Kitchen",
-        image: "https://m.media-amazon.com/images/I/61x+LbagnPL._AC_SX569_.jpg"
-      },
-      {
-        id: 4,
-        asin: "B0FFMBK31G",
-        category: "Home & Kitchen",
-        image: "https://m.media-amazon.com/images/I/61rd3y9wh6L._AC_SX679_.jpg"
-      },
-      {
-        id: 5,
-        asin: "B0FPM59XFY",
-        category: "Home & Kitchen",
-        image: "https://m.media-amazon.com/images/I/71z8iM5kvjL._AC_SX522_.jpg"
-      },
-      {
-        id: 6,
-        asin: "B0FMK2HZTB",
-        category: "Home & Kitchen",
-        image: "https://m.media-amazon.com/images/I/71hn6SDt9aL._AC_SX522_.jpg"
-      },
-      {
-        id: 7,
-        asin: "B0D5CTCT6P",
-        category: "Outdoor & Sports",
-        image: "https://m.media-amazon.com/images/I/91QBaSjAo8L._AC_SY300_SX300_QL70_ML2_.jpg"
-      },
-      {
-        id: 8,
-        asin: "B0D6VKS1JV",
-        category: "Outdoor & Sports",
-        image: "https://m.media-amazon.com/images/I/61wifIYOsQL._AC_SY575_.jpg"
-      },
-      {
-        id: 9,
-        asin: "B0FM3X4GD1",
-        category: "Car Accessories",
-        image: "https://m.media-amazon.com/images/I/71ewzCslWvL._AC_SX522_.jpg"
-      },
-      {
-        id: 10,
-        asin: "B0FFMWWWQ8",
-        category: "Car Accessories",
-        image: "https://m.media-amazon.com/images/I/71VbFvQ-ibL._AC_SX569_.jpg"
-      }
-      // 👉 在这里继续把你剩下的 FR ASIN 按相同格式追加即可
+      { asin: "B0FQ1GL733", image: "https://m.media-amazon.com/images/I/81ji0Wi0N7L._AC_SY500_.jpg" },
+      { asin: "B0C6F6S8B7", image: "https://m.media-amazon.com/images/I/61V2MCYWmdL._AC_SY500_.jpg" },
+      { asin: "B0FMRP7DD7", image: "https://m.media-amazon.com/images/I/61x+LbagnPL._AC_SX569_.jpg" },
+      { asin: "B0FFMBK31G", image: "https://m.media-amazon.com/images/I/61rd3y9wh6L._AC_SX679_.jpg" },
+      { asin: "B0FPM59XFY", image: "https://m.media-amazon.com/images/I/71z8iM5kvjL._AC_SX522_.jpg" },
+      { asin: "B0FMK2HZTB", image: "https://m.media-amazon.com/images/I/71hn6SDt9aL._AC_SX522_.jpg" },
+      { asin: "B0D5CTCT6P", image: "https://m.media-amazon.com/images/I/91QBaSjAo8L._AC_SY300_SX300_QL70_ML2_.jpg" },
+      { asin: "B0D6VKS1JV", image: "https://m.media-amazon.com/images/I/61wifIYOsQL._AC_SY575_.jpg" },
+      { asin: "B0FM3X4GD1", image: "https://m.media-amazon.com/images/I/71ewzCslWvL._AC_SX522_.jpg" },
+      { asin: "B0FFMWWWQ8", image: "https://m.media-amazon.com/images/I/71VbFvQ-ibL._AC_SX569_.jpg" },
+      { asin: "B0DF58SW2Y", image: "https://m.media-amazon.com/images/I/61WRm+ue9LL._AC_SX569_.jpg" },
+      { asin: "B0FD2CJ9S4", image: "https://m.media-amazon.com/images/I/61EKToAK3yL._AC_SY355_.jpg" },
+      { asin: "B0FNJZXJJX", image: "https://m.media-amazon.com/images/I/61dZo2B1FPL._AC_SX569_.jpg" },
+      { asin: "B0FR4VSZR8", image: "https://m.media-amazon.com/images/I/713kI0tajCL._AC_SX522_.jpg" },
+      { asin: "B0FHPBB65X", image: "https://m.media-amazon.com/images/I/61CzHQi14OL._AC_SX522_.jpg" },
+      { asin: "B0DDRFJ9CZ", image: "https://m.media-amazon.com/images/I/714mJIiMOQL._AC_SY575_.jpg" },
+      { asin: "B0DF2RDTBH", image: "https://m.media-amazon.com/images/I/61q924SwZuL._AC_SY575_.jpg" },
+      { asin: "B0FSCYD2X8", image: "https://m.media-amazon.com/images/I/41BveLVVWoL._AC_SX522_.jpg" },
+      { asin: "B0FG7TG354", image: "https://m.media-amazon.com/images/I/81saC26nuLL._AC_SX569_.jpg" },
+      { asin: "B0FK2FVF7D", image: "https://m.media-amazon.com/images/I/41McuCtla5L._AC_.jpg" },
+      { asin: "B0FDG63ZM3", image: "https://m.media-amazon.com/images/I/61opL86XNZL._AC_SX522_.jpg" },
+      { asin: "B0FQMW3YHD", image: "https://m.media-amazon.com/images/I/71xg7+JeV4L._AC_SY500_.jpg" },
+      { asin: "B0FQNXDD71", image: "https://m.media-amazon.com/images/I/51wLOAodGRL._AC_.jpg" },
+      { asin: "B0FJDQQM9Q", image: "https://m.media-amazon.com/images/I/51N17adb-RL._AC_SY355_.jpg" },
+      { asin: "B0DFNTXSQH", image: "https://m.media-amazon.com/images/I/81caQP5gUhL._AC_SX679_.jpg" },
+      { asin: "B0CBJDV9R8", image: "https://m.media-amazon.com/images/I/71T84LDQ31L._AC_SX522_.jpg" },
+      { asin: "B0FG7Y3GQ1", image: "https://m.media-amazon.com/images/I/61t2hS0YNHL._AC_SY575_.jpg" },
+      { asin: "B0FK4NVHT3", image: "https://m.media-amazon.com/images/I/611o27lMKaL._AC_SY355_.jpg" },
+      { asin: "B0FNJWK4MT", image: "https://m.media-amazon.com/images/I/71zjuIBbi9L._AC_SX425_.jpg" },
+      { asin: "B095HC4R32", image: "https://m.media-amazon.com/images/I/51vWSFuQ+iS._AC_SX679_.jpg" },
+      { asin: "B0FGWNKQ2B", image: "https://m.media-amazon.com/images/I/61gP+IVBEQL._AC_SX425_.jpg" },
+      { asin: "B0FFB39ZZN", image: "https://m.media-amazon.com/images/I/61S3g9N58UL._AC_SY355_.jpg" },
+      { asin: "B0FB3FSM59", image: "https://m.media-amazon.com/images/I/61huj+1E77L._AC_SX679_.jpg" },
+      { asin: "B0FK49425H", image: "https://m.media-amazon.com/images/I/71td6PBIE4L._AC_SX522_.jpg" },
+      { asin: "B0F84B1HM1", image: "https://m.media-amazon.com/images/I/61aOhG2hB5L._AC_SX679_.jpg" },
+      { asin: "B0FLPBHTHC", image: "https://m.media-amazon.com/images/I/61mttFSCXOL._AC_SY575_.jpg" },
+      { asin: "B0FFMFRZ98", image: "https://m.media-amazon.com/images/I/71gyHwlHmmL._AC_SX522_.jpg" },
+      { asin: "B0F9PD3H66", image: "https://m.media-amazon.com/images/I/515tON-Q53L._AC_SY575_.jpg" },
+      { asin: "B0DZCMXQ7T", image: "https://m.media-amazon.com/images/I/61jTVXrsndL._AC_SY500_.jpg" },
+      { asin: "B0FXDRN7DS", image: "https://m.media-amazon.com/images/I/71nJCfZI22L._AC_SY500_.jpg" },
+      { asin: "B0DL3DMQY2", image: "https://m.media-amazon.com/images/I/5107IhIRiML._AC_SX569_.jpg" },
+      { asin: "B0FRM8KCNC", image: "https://m.media-amazon.com/images/I/51dcgYvHeBL._AC_SX679_.jpg" },
+      { asin: "B0FRYV9ZP4", image: "https://m.media-amazon.com/images/I/51MOEqb58XL._AC_SX679_.jpg" },
+      { asin: "B0FH642T9W", image: "https://m.media-amazon.com/images/I/714qU0wCuOL._AC_SX569_.jpg" },
+      { asin: "B0FS1TDJ42", image: "https://m.media-amazon.com/images/I/712+M0dlBIL._AC_SX679_.jpg" },
+      { asin: "B0DCG2KX4N", image: "https://m.media-amazon.com/images/I/81AZa9hKelL._AC_SY355_.jpg" },
+      { asin: "B0FMRQ1PR1", image: "https://m.media-amazon.com/images/I/711q3wCOAPL._AC_SX569_.jpg" },
+      { asin: "B0FNVS4RWC", image: "https://m.media-amazon.com/images/I/71FGWxoN1oL._AC_SX679_.jpg" },
+      { asin: "B0FS1RDGWZ", image: "https://m.media-amazon.com/images/I/71cwKfhstmL._AC_SX679_.jpg" },
+      { asin: "B0FC2HWYKY", image: "https://m.media-amazon.com/images/I/81SUOujJvOL._AC_SX425_.jpg" },
+      { asin: "B0FDBCMVC8", image: "https://m.media-amazon.com/images/I/71wkiZNyaKL._AC_SX425_.jpg" },
+      { asin: "B0FDQJQWQG", image: "https://m.media-amazon.com/images/I/61RbPQwcvYL._AC_SX425_.jpg" },
+      { asin: "B0FFN4QV78", image: "https://m.media-amazon.com/images/I/71psz4BNoBL._AC_SX569_.jpg" },
+      { asin: "B0FVVXV92D", image: "https://m.media-amazon.com/images/I/71k7vryVDGL._AC_SX569_.jpg" },
+      { asin: "B0FRF5LYSR", image: "https://m.media-amazon.com/images/I/61AZYiunCgL._SX342_.jpg" },
+      { asin: "B0FLXBNFS1", image: "https://m.media-amazon.com/images/I/7119F3mcyrL._AC_SX569_.jpg" },
+      { asin: "B0FN8GK19M", image: "https://m.media-amazon.com/images/I/61IXxBfLHJL._AC_SX425_.jpg" },
+      { asin: "B0FK2GF6MR", image: "https://m.media-amazon.com/images/I/71Z66LmHnSL._AC_SX466_.jpg" },
+      { asin: "B0FHW7N6V6", image: "https://m.media-amazon.com/images/I/718EKQyet8L._AC_SX425_.jpg" },
+      { asin: "B0FDG38D19", image: "https://m.media-amazon.com/images/I/71f3ZFekBqL._AC_SX569_.jpg" },
+      { asin: "B0F9K19FVM", image: "https://m.media-amazon.com/images/I/81-hYME9FdL._AC_SY500_.jpg" }
     ];
 
-    /* --------------- 2. 生成展示用产品对象 -------------- */
+    /* ---------------- 2. 构建带文案 + 类目 的产品对象 ---------------- */
+
+    const CATEGORY_CYCLE = [
+      "Electronics & Gadgets",
+      "Home & Kitchen",
+      "Outdoor & Sports",
+      "Car Accessories",
+      "Office & Daily Use"
+    ];
 
     function buildProducts(rawList) {
       return rawList.map((item, index) => {
         const id = index + 1;
-        const title = `Product #${id} – ${item.category} Pick`;
+        const category = CATEGORY_CYCLE[index % CATEGORY_CYCLE.length];
+        const title = `Product #${id} – ${category} Pick`;
         const hook =
           "This pick is designed as a practical option in this category, balancing everyday performance, ease of use and reasonable value.";
         const details =
           "Use this shortlist as a quick way to spot products that may deserve a closer look on Amazon.fr. Always check the live Amazon.fr page for full details, price and availability.";
-        const approxPriceLabel = "Check live price on Amazon.fr";
+        const approxPriceLabel = "Details & live price on Amazon.fr";
         const amazonUrl = `${AMAZON_DOMAIN}/dp/${item.asin}/?tag=${AFFILIATE_ID}`;
         const reviewText = [
           "This editorial note is written to stay general on purpose so that it never conflicts with the live details and reviews on Amazon.fr.",
@@ -896,6 +906,8 @@
 
         return {
           ...item,
+          id,
+          category,
           title,
           hook,
           details,
@@ -908,7 +920,7 @@
 
     const products = buildProducts(rawProducts);
 
-    /* --------------- 3. 渲染逻辑 + 交互 -------------- */
+    /* ---------------- 3. 渲染 + 筛选逻辑 ---------------- */
 
     const gridEl = document.getElementById("product-grid");
     const countEl = document.getElementById("count-label");
@@ -957,20 +969,15 @@
           <div class="product-card_footer">
             <div class="product-card_price">${p.approxPriceLabel}</div>
             <div class="product-card_actions">
-              <button class="btn-secondary" type="button" data-action="review" data-asin="${
-                p.asin
-              }">Read review</button>
-              <a class="btn-primary" href="${
-                p.amazonUrl
-              }" target="_blank" rel="nofollow noopener sponsored">Go to Amazon</a>
+              <button class="btn-secondary" type="button" data-action="review" data-asin="${p.asin}">Read review</button>
+              <a class="btn-primary" href="${p.amazonUrl}" target="_blank" rel="nofollow noopener sponsored">Go to Amazon</a>
             </div>
           </div>
         `;
         gridEl.appendChild(card);
       });
 
-      countEl.textContent = `Showing ${list.length} product${list.length !== 1 ? "s" : ""
-        }`;
+      countEl.textContent = `Showing ${list.length} product${list.length !== 1 ? "s" : ""}`;
     }
 
     chips.forEach((chip) => {
@@ -993,16 +1000,14 @@
       if (e.key === "Enter") applySearch();
     });
 
-    /* --------------- 4. 弹窗逻辑 -------------- */
+    /* ---------------- 4. 弹窗逻辑 ---------------- */
 
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
     const modalContent = document.getElementById("modal-content");
     const modalMeta = document.getElementById("modal-meta");
     const modalLink = document.getElementById("modal-link");
-    const modalCloseButtons = Array.from(
-      document.querySelectorAll(".modal-close")
-    );
+    const modalCloseButtons = Array.from(document.querySelectorAll(".modal-close"));
 
     function openModal(product) {
       modalTitle.textContent = `${product.title} • Selected item from Amazon.fr`;
@@ -1021,9 +1026,7 @@
       modal.classList.remove("is-open");
     }
 
-    modalCloseButtons.forEach((btn) =>
-      btn.addEventListener("click", closeModal)
-    );
+    modalCloseButtons.forEach((btn) => btn.addEventListener("click", closeModal));
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
